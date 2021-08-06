@@ -218,8 +218,10 @@ public class PageWriter {
 		String html = Utils.fileToString("./resources/Template.Menu.html");
 
 		// Replacing the tags for the actual values
-		String core = "";
-		String domain = "";
+		String SEONcore = "";
+		String HCIONcore = "";
+		String SEONdomain = "";
+		String HCIONdomain = "";
 		String found = "";
 		for (Ontology ontology : ontologies) {
 			OntoLevel level = ontology.getLevel();
@@ -228,14 +230,22 @@ public class PageWriter {
 				line = line.replace("@ontology", ontology.getShortName() + " - " + ontology.getFullName());
 				line = line.replace("@onto", ontology.getShortName());
 				if (level == OntoLevel.FOUNDATIONAL) found += line + "\n";
-				else if (level == OntoLevel.CORE) core += line + "\n";
-				else if (level == OntoLevel.DOMAIN) domain += line + "\n";
+				else if (level == OntoLevel.CORE ) {
+					if (ontology.isInHCION()) {HCIONcore += line + "\n";}
+					else if(ontology.isInSEON()) {SEONcore += line + "\n";}
+				}
+				else if (level == OntoLevel.DOMAIN) {
+					if (ontology.isInHCION()) {HCIONdomain += line + "\n";}
+					else if (ontology.isInSEON()){HCIONcore += line + "\n";}
+				}
 				// other level: ignore
 			}
 		}
 		html = html.replace("@foundOntology", found);
-		html = html.replace("@coreOntologies", core);
-		html = html.replace("@domainOntologies", domain);
+		html = html.replace("@SEONcoreOntologies", SEONcore);
+		html = html.replace("@SEONdomainOntologies", SEONdomain);
+		html = html.replace("@HCIONcoreOntologies", HCIONcore);
+		html = html.replace("@HCIONdomainOntologies", HCIONdomain);
 		html = html.replace("@version", "SEON Version " + SeonParser.VERSION);
 		html = html.replace("@date", (new Date()).toString());
 
