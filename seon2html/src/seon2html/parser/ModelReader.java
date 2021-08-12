@@ -66,7 +66,9 @@ public class ModelReader {
 					String shortName = elem.getTaggedValue("ShortName");
 					String definition = elem.getDefinition();
 					String sorder = elem.getTaggedValue("Order");
-					String network = elem.getTaggedValue("network");
+					String network = elem.getTaggedValue("Network");
+					System.out.println("name:["+ packName+"]");
+					System.out.println("Network:["+network+"]");
 					int order = 100;
 					if (!sorder.isEmpty()) order = Integer.valueOf(sorder);
 
@@ -76,6 +78,8 @@ public class ModelReader {
 					} else if (type == PackType.ONTOLOGY || type == PackType.SUBONTOLOGY) {
 						pack = new Ontology(packName, fullName, shortName, definition, type, order, (IPackage) elem, network);
 					}
+
+
 					pack.setParent(superpack);
 					superpack.addPack(pack);
 

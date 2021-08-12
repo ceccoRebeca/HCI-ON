@@ -21,8 +21,7 @@ public class Package implements Comparable<Package> {
 	private List<Dependency>				dependencies;
 	private List<Diagram>					diagrams;
 	private IPackage						astahPack;
-	private boolean 						isInHCION;
-	private boolean 						isInSEON;
+	private String 							network = "\0";
 
 	public static enum PackType {
 		NETWORK, SUBNETWORK, LEVEL, PACKAGE, ONTOLOGY, SUBONTOLOGY, IGNORE
@@ -36,18 +35,9 @@ public class Package implements Comparable<Package> {
 		this.subpacks = new ArrayList<Package>();
 		this.dependencies = new ArrayList<Dependency>();
 		this.diagrams = new ArrayList<Diagram>();
-		this.astahPack = astahPack;
-		if (network != null) {	
-			if (network == "HCI-ON") {
-				this.isInHCION = true;
-			}
-			else if (network == "SEON") {
-				this.isInSEON = true;
-			}
-		}
-		else 
-			this.isInHCION =  false; this.isInSEON = false;
-			
+		this.astahPack = astahPack;	
+		this.network = network;
+		
 		packageMap.put(astahPack, this);
 	}
 
@@ -114,13 +104,9 @@ public class Package implements Comparable<Package> {
 	public Package getParent() {
 		return this.parent;
 	}
-	
-	public boolean isInSEON() {
-		return this.isInSEON;
-	}
-	
-	public boolean isInHCION() {
-		return this.isInHCION;
+
+	public String getNetwork() {
+		return this.network;
 	}
 	
 	public List<Package> getPacks() {

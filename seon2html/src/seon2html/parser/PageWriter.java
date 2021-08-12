@@ -231,12 +231,20 @@ public class PageWriter {
 				line = line.replace("@onto", ontology.getShortName());
 				if (level == OntoLevel.FOUNDATIONAL) found += line + "\n";
 				else if (level == OntoLevel.CORE ) {
-					if (ontology.isInHCION()) {HCIONcore += line + "\n";}
-					else if(ontology.isInSEON()) {SEONcore += line + "\n";}
+					System.out.println("**CORE LEVEL**");
+					if (ontology.getNetwork() == "HCI-ON") {HCIONcore += line + "\n";}
+					else if(ontology.getNetwork() == "SEON") {SEONcore += line + "\n";}
+					else {
+						System.out.println("Network not found: " + ontology.getNetwork());
+					}
 				}
 				else if (level == OntoLevel.DOMAIN) {
-					if (ontology.isInHCION()) {HCIONdomain += line + "\n";}
-					else if (ontology.isInSEON()){HCIONcore += line + "\n";}
+					System.out.println("**DOMAIN LEVEL**");
+					if (ontology.getNetwork() == "HCI-ON") {HCIONdomain += line + "\n";}
+					else if (ontology.getNetwork() == "SEON"){HCIONcore += line + "\n";}
+					else {
+						System.out.println("Network not found:" + ontology.getNetwork());
+					}
 				}
 				// other level: ignore
 			}
