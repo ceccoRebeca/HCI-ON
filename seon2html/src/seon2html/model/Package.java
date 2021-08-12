@@ -21,7 +21,7 @@ public class Package implements Comparable<Package> {
 	private List<Dependency>				dependencies;
 	private List<Diagram>					diagrams;
 	private IPackage						astahPack;
-	private String 							network = "\0";
+	private String 							network;
 
 	public static enum PackType {
 		NETWORK, SUBNETWORK, LEVEL, PACKAGE, ONTOLOGY, SUBONTOLOGY, IGNORE

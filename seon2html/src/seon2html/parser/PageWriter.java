@@ -223,6 +223,8 @@ public class PageWriter {
 		String SEONdomain = "";
 		String HCIONdomain = "";
 		String found = "";
+		String hcion = "HCI-ON";
+		String seon = "SEON";
 		for (Ontology ontology : ontologies) {
 			OntoLevel level = ontology.getLevel();
 			if (level != null) {
@@ -232,16 +234,18 @@ public class PageWriter {
 				if (level == OntoLevel.FOUNDATIONAL) found += line + "\n";
 				else if (level == OntoLevel.CORE ) {
 					System.out.println("**CORE LEVEL**");
-					if (ontology.getNetwork() == "HCI-ON") {HCIONcore += line + "\n";}
-					else if(ontology.getNetwork() == "SEON") {SEONcore += line + "\n";}
+					System.out.println(ontology.getFullName());
+					System.out.println(ontology.getNetwork());
+					if (ontology.getNetwork().equals(hcion)) {HCIONcore += line + "\n";}
+					else if(ontology.getNetwork().equals(seon)) {SEONcore += line + "\n";}
 					else {
 						System.out.println("Network not found: " + ontology.getNetwork());
 					}
 				}
 				else if (level == OntoLevel.DOMAIN) {
 					System.out.println("**DOMAIN LEVEL**");
-					if (ontology.getNetwork() == "HCI-ON") {HCIONdomain += line + "\n";}
-					else if (ontology.getNetwork() == "SEON"){HCIONcore += line + "\n";}
+					if (ontology.getNetwork().equals(hcion)) {HCIONdomain += line + "\n";}
+					else if (ontology.getNetwork().equals(seon)){SEONdomain += line + "\n";}
 					else {
 						System.out.println("Network not found:" + ontology.getNetwork());
 					}

@@ -38,7 +38,7 @@ public class SeonParser {
 		System.out.println("Properties: " + props);
 
 		// Exporting images from astah and copying to the proper location for the page
-		//recoverAstahImages(props.getProperty("astah.location"), astahfile, props.getProperty("images.export").equals("auto"));
+		recoverAstahImages(props.getProperty("astah.location"), astahfile, props.getProperty("images.export").equals("auto"));
 
 		// Reading the Astah file and building the Seon Model
 		ModelReader reader = new ModelReader();
