@@ -24,7 +24,7 @@ public class Package implements Comparable<Package> {
 	private String 							network;
 
 	public static enum PackType {
-		NETWORK, SUBNETWORK, LEVEL, PACKAGE, ONTOLOGY, SUBONTOLOGY, IGNORE
+		NETWORK, SUBNETWORK, LEVEL, PACKAGE, ONTOLOGY, SUBONTOLOGY, IGNORE, REUSED
 	}
 
 	public Package(String name, String definition, PackType type, int order, IPackage astahPack, String network) {
@@ -76,6 +76,8 @@ public class Package implements Comparable<Package> {
 				return PackType.IGNORE;
 			case "Network":
 				return PackType.NETWORK;
+			case "Reused":
+				return PackType.REUSED;
 			}
 		}
 		return PackType.PACKAGE;

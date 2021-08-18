@@ -48,9 +48,9 @@ public class PageWriter {
 		generateMenuPage();
 
 		// Generating the information pages
-		generateNetworkGraph(seon);
+		//generateNetworkGraph(seon);
 		generateSearchBase();
-		generateStatsPage();
+		//generateStatsPage();
 
 		// Copying the static page files
 		recoverStaticPages();
@@ -60,7 +60,7 @@ public class PageWriter {
 	private void generateContentPages(Package superpack) {
 		// Reaching the Ontologies
 		for (Package pack : superpack.getPacks()) {
-			if (pack.getType() == PackType.ONTOLOGY) {
+			if (pack.getType() == PackType.ONTOLOGY && pack.getNetwork().equals("HCI-ON")) {
 				// Generating the Ontologies' Pages
 				generateOntologyPage((Ontology) pack);
 				ontologies.add((Ontology) pack);
@@ -218,13 +218,13 @@ public class PageWriter {
 		String html = Utils.fileToString("./resources/Template.Menu.html");
 
 		// Replacing the tags for the actual values
-		String SEONcore = "";
+		//String SEONcore = "";
 		String HCIONcore = "";
-		String SEONdomain = "";
+		//String SEONdomain = "";
 		String HCIONdomain = "";
 		String found = "";
 		String hcion = "HCI-ON";
-		String seon = "SEON";
+		//String seon = "SEON";
 		for (Ontology ontology : ontologies) {
 			OntoLevel level = ontology.getLevel();
 			if (level != null) {
@@ -237,7 +237,7 @@ public class PageWriter {
 					System.out.println(ontology.getFullName());
 					System.out.println(ontology.getNetwork());
 					if (ontology.getNetwork().equals(hcion)) {HCIONcore += line + "\n";}
-					else if(ontology.getNetwork().equals(seon)) {SEONcore += line + "\n";}
+					//else if(ontology.getNetwork().equals(seon)) {SEONcore += line + "\n";}
 					else {
 						System.out.println("Network not found: " + ontology.getNetwork());
 					}
@@ -245,7 +245,7 @@ public class PageWriter {
 				else if (level == OntoLevel.DOMAIN) {
 					System.out.println("**DOMAIN LEVEL**");
 					if (ontology.getNetwork().equals(hcion)) {HCIONdomain += line + "\n";}
-					else if (ontology.getNetwork().equals(seon)){SEONdomain += line + "\n";}
+					//else if (ontology.getNetwork().equals(seon)){SEONdomain += line + "\n";}
 					else {
 						System.out.println("Network not found:" + ontology.getNetwork());
 					}
@@ -254,8 +254,8 @@ public class PageWriter {
 			}
 		}
 		html = html.replace("@foundOntology", found);
-		html = html.replace("@SEONcoreOntologies", SEONcore);
-		html = html.replace("@SEONdomainOntologies", SEONdomain);
+		//html = html.replace("@SEONcoreOntologies", SEONcore);
+		//html = html.replace("@SEONdomainOntologies", SEONdomain);
 		html = html.replace("@HCIONcoreOntologies", HCIONcore);
 		html = html.replace("@HCIONdomainOntologies", HCIONdomain);
 		html = html.replace("@version", "SEON Version " + SeonParser.VERSION);
